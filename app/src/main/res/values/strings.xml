@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Never Lost</string>
+
+    <string name="notification_title">自动防盗已开启</string>
+    <string name="notification_text">锁屏后放入口袋，拿出不解锁报警</string>
+    <string name="setting_protect">防盗设置</string>
+    <string name="setting">设置</string>
+    <string name="other">其它</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="choose_audio_file">选择音频文件</string>
+    <string name="please_install_a_file_manager">手机木有文件管理器，请先安装！</string>
+    <string name="open_tone">开启提示音</string>
+    <string name="protect_tone">防护提示音</string>
+    <string name="warning_sound">报警声</string>
+    <string name="file_name">文件名</string>
+    <string name="protect_delay">防护延时（灵敏度）</string>
+    <string name="waning_delay">报警延时（灵敏度）</string>
+    <string name="click_to_skip">点击跳过</string>
+    <string name="title_check_upgrade">检测更新</string>
+    <string name="version_code">V 1.0.0</string>
+    <string name="auto_protect_mode">防盗模式</string>
+    <string name="keep_loud">音量保持最大</string>
+    <string name="vibrator_not_delay">震动提示不延时</string>
+    <string name="title_help">帮助</string>
+</resources>
