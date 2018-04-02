@@ -56,8 +56,6 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         // 实例化对象
         soundPlayer = new SoundPlayer(this);
 
-        // 设置自动防盗功能按键
-        //tbLock.setChecked(SPUtils.getInstance().getBoolean(SPConfig.AUTO_PROTECT));
         if(!tbLock.isChecked()){
             rippleBack.startRippleAnimation();
         }
@@ -89,6 +87,8 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
             // 开启自动防盗服务
             Intent startIntent = new Intent(this, AutoProtectService.class);
             startService(startIntent);//启动服务
+            Intent poIntent=new Intent(MainActivity.this,PocketActivity.class);
+            startActivity(poIntent);
 
         } else {
             // 显示波纹效果

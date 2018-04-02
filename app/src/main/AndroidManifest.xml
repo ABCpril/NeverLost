@@ -15,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <service
             android:name=".service.AutoProtectService"
             android:enabled="true"
@@ -37,7 +36,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.SettingActivity" />
-        <activity android:name=".ui.SoundFileActivity"></activity>
+        <activity android:name=".ui.SoundFileActivity" />
+        <activity android:name=".ui.PocketActivity"></activity>
     </application>
 
 </manifest>
