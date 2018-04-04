@@ -23,4 +23,12 @@
     <string name="keep_loud">音量保持最大</string>
     <string name="vibrator_not_delay">震动提示不延时</string>
     <string name="title_help">帮助</string>
+    <string name="select_sphone">请选择您的安全手机</string>
+    <string name="sphone_card">安全手机</string>
+    <string name="sphone_number">安全手机号码</string>
+    <string name="security_message">安全短信内容</string>
+    <string name="sphone_number_tips">请输入您绑定的安全手机号码</string>
+    <string name="security_message_tips">请输入您设置的安全短信内容</string>
+    <string name="select_sphone_tips">当您的手机丢失后，只要使用安全手机向您的丢失手机发送安全短信内容，则会回复您丢失手机的当前位置</string>
+
 </resources>

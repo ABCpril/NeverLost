@@ -44,7 +44,6 @@ public class AutoProtectService extends Service {
                 if (!isUsbGuard && !isUsbIn) {
                     //没插USB, isUsbGuard为false的情况下，接通USB，就播放防护提示音
                     //soundPlayer.playProtectTone();
-
                 }
                 isUsbIn = true;
                 isUsbGuard = true;
