@@ -39,29 +39,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/ll_protect_pocket"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="12dp"
-                            android:layout_weight="1"
-                            android:text="口袋模式"
-                            tools:ignore="RtlHardcoded" />
-
-                        <com.suke.widget.SwitchButton
-                            android:id="@+id/sb_protect_pocket"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:sb_checked="true" />
-                    </LinearLayout>
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
@@ -80,7 +57,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="12dp"
                             android:layout_weight="1"
-                            android:text="USB模式"
+                            android:text="@string/USB_protection"
                             tools:ignore="RtlHardcoded" />
 
                         <com.suke.widget.SwitchButton
@@ -96,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:paddingLeft="12dp"
-                android:text="防护开启" />
+                android:text="@string/setting_open" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -111,42 +88,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/ll_protect_delay"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="12dp"
-                            android:layout_weight="1"
-                            android:text="开启灵敏度（延时）"
-                            tools:ignore="RtlHardcoded" />
-
-                        <TextView
-                            android:id="@+id/tv_protect_delay"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="一般(3s)" />
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_next_gray_24dp"
-                            tools:ignore="VectorDrawableCompat" />
-                    </LinearLayout>
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="@color/divider" />
 
                     <LinearLayout
-                        android:id="@+id/ll_protect_tone"
+                        android:id="@+id/ll_open_tone"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:gravity="center_vertical"
@@ -158,14 +106,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="12dp"
                             android:layout_weight="1"
-                            android:text="提示音"
-                             />
+                            android:text="@string/open_tone"
+                            tools:ignore="RtlHardcoded" />
 
                         <TextView
-                            android:id="@+id/tv_protect_tone"
+                            android:id="@+id/tv_open_tone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="锁车音" />
+                            android:text="@string/open_default" />
 
                         <android.support.v7.widget.AppCompatImageView
                             android:layout_width="wrap_content"
@@ -192,11 +140,95 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="12dp"
                             android:layout_weight="1"
-                            android:text="震动提示"
+                            android:text="@string/virate_or_not"
                             tools:ignore="RtlHardcoded" />
 
                         <com.suke.widget.SwitchButton
-                            android:id="@+id/sb_protect_vibrator"
+                            android:id="@+id/sb_open_vibrator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:sb_checked="true" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:paddingLeft="12dp"
+                android:text="@string/setting_warning" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="#fff"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_warning_tone"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_weight="1"
+                            android:text="@string/warning_sound"
+                            tools:ignore="RtlHardcoded" />
+
+                        <TextView
+                            android:id="@+id/tv_warning_sound"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/warning_default" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_next_gray_24dp"
+                            tools:ignore="VectorDrawableCompat" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_warning_vibrator"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="12dp"
+                            android:layout_weight="1"
+                            android:text="@string/virate_or_not"
+                            tools:ignore="RtlHardcoded" />
+
+                        <com.suke.widget.SwitchButton
+                            android:id="@+id/sb_warning_vibrator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:sb_checked="true" />
@@ -233,7 +265,6 @@
                         android:background="#00000000"
                         android:text="@string/select_sphone"
                         tools:ignore="RtlHardcoded" />
-
                 </LinearLayout>
 
 
