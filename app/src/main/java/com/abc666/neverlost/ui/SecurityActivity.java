@@ -27,12 +27,10 @@ public class SecurityActivity extends AppCompatActivity {
                 if(!et_sphone_number.getText().toString().isEmpty()){
                     if(!et_security_message.getText().toString().isEmpty()){
                         Toast.makeText(SecurityActivity.this,"当您的手机丢失后，只要使用安全手机向您的丢失手机发送安全短信内容，则会回复您丢失手机的当前位置",Toast.LENGTH_LONG).show();
-                        Intent intent_number = new Intent();
-                        Intent intent_message = new Intent();
-                        intent_number.putExtra("sphone_number",et_sphone_number.getText().toString());
-                        intent_message.putExtra("security_message",et_security_message.getText().toString());
-                        setResult(RESULT_OK,intent_number);
-                        setResult(RESULT_OK,intent_message);
+                        Intent intent = new Intent();
+                        intent.putExtra("sphone_number",et_sphone_number.getText().toString());
+                        intent.putExtra("security_message",et_security_message.getText().toString());
+                        setResult(RESULT_OK,intent);
                         finish();
                     }else{
                         Toast.makeText(SecurityActivity.this,"请输入您设置的安全短信内容",Toast.LENGTH_LONG).show();

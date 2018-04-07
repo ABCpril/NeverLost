@@ -60,12 +60,7 @@ public class SettingActivity extends AppCompatActivity {
                 startActivityForResult(intent, 1);
             }
         });
-        Intent intent_number = new Intent();
-        Intent intent_message = new Intent();
-        intent_number.putExtra("sphone_number", sphone_number);
-        intent_message.putExtra("security_message", security_message);
-        setResult(RESULT_OK, intent_number);
-        setResult(RESULT_OK, intent_message);
+
     }
 
     private void InitView() {
@@ -86,6 +81,8 @@ public class SettingActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     sphone_number = data.getStringExtra("sphone_number");
                     security_message = data.getStringExtra("security_message");
+                    SharedUtils.putString(this,"sphone_number",sphone_number);
+                    SharedUtils.putString(this,"security_message",security_message);
                 }
         }
     }
