@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Never Lost</string>
+    <string name="notification_title">Under Protected</string>
+    <string name="notification_text">USB Protected now automatically. Put your phone into pocket to start pocket protection.</string>
+    <string name="setting_protect">setting of protection</string>
+    <string name="setting">Setting</string>
+    <string name="setting_open">Start protection</string>
+    <string name="setting_warning">Start warning</string>
+    <string name="other">other</string>
+    <string name="sure">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_audio_file">choose audio file</string>
+    <string name="open_tone">open tune</string>
+    <string name="protect_tone">protect tone</string>
+    <string name="virate_or_not">virate when start</string>
+    <string name="warning_sound">warning sound</string>
+    <string name="file_name">file</string>
+    <string name="protect_delay">Delay to protect</string>
+    <string name="waning_delay">Delay to warning</string>
+    <string name="version_code">V 1.0.0</string>
+    <string name="auto_protect_mode">Mode of protect</string>
+    <string name="title_help">Help</string>
+    <string name="open_default">Car Lock</string>
+    <string name="warning_default">Car Horn</string>
+    <string name="USB_protection">USB Protection</string>
+    <string name="select_sphone">Select safe-phone number</string>
+    <string name="sphone_card">Safe Phone</string>
+    <string name="sphone_number">safe-phone number</string>
+    <string name="security_message">safe message</string>
+    <string name="sphone_number_tips">input your safe-phone number</string>
+    <string name="security_message_tips">input your safe message</string>
+    <string name="select_sphone_tips">When your phone is lost, current location of it will be sent if using the safe-phone number to send safe message to the lost phone.</string>
+
+</resources>

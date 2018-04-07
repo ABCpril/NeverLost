@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Never Lost</string>
+    <string name="notification_title">自动防盗已开启</string>
+    <string name="notification_text">USB防盗已自动开启，请把手机放进口袋，以开启口袋防盗</string>
+    <string name="setting_protect">防盗设置</string>
+    <string name="setting_open">防护开启</string>
+    <string name="setting_warning">警报开启</string>
+    <string name="setting">设置</string>
+    <string name="other">其它</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="choose_audio_file">选择音频文件</string>
+    <string name="open_tone">开启提示音</string>
+    <string name="protect_tone">防护提示音</string>
+    <string name="virate_or_not">震动提示</string>
+    <string name="warning_sound">报警声</string>
+    <string name="file_name">文件名</string>
+    <string name="protect_delay">防护延时（灵敏度）</string>
+    <string name="waning_delay">报警延时（灵敏度）</string>
+    <string name="version_code">V 1.0.0</string>
+    <string name="auto_protect_mode">防盗模式</string>
+    <string name="title_help">帮助</string>
+    <string name="open_default">锁车</string>
+    <string name="warning_default">鸣笛</string>
+    <string name="USB_protection">USB模式</string>
+    <string name="select_sphone">请选择您的安全手机</string>
+    <string name="sphone_card">安全手机</string>
+    <string name="sphone_number">安全手机号码</string>
+    <string name="security_message">安全短信内容</string>
+    <string name="sphone_number_tips">请输入您绑定的安全手机号码</string>
+    <string name="security_message_tips">请输入您设置的安全短信内容</string>
+    <string name="select_sphone_tips">当您的手机丢失后，只要使用安全手机向您的丢失手机发送安全短信内容，则会回复您丢失手机的当前位置</string>
+
+</resources>

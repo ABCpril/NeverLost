@@ -14,11 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.abc666.neverlost.R;
+import com.abc666.neverlost.module.SoundPlayer;
+import com.abc666.neverlost.util.SharedUtils;
 
 public class PocketActivity extends Activity implements SensorEventListener {
 
     SensorManager sm;
     Sensor s;
+    private SoundPlayer soundPlayer;
 
     private enum PocketProtectState {
         UNLOCK,
@@ -70,20 +73,27 @@ public class PocketActivity extends Activity implements SensorEventListener {
         float f=event.values[0];
         if(f==0){
             pocketProtectState = PocketProtectState.IN_POCKET;
-            Vibrator mvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-            mvibrator.vibrate(2000);
+            boolean isOpenVibrator = SharedUtils.getBoolean(this, "OpenVibrator", true);
+            if (isOpenVibrator){
+                Vibrator mvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                mvibrator.vibrate(2000);
+            }
+            //soundPlayer.playOpenTone();
+            //soundPlayer.playToneRaw(2);
+
             pocketProtectState = PocketProtectState.START_GUARD;
 
-        }
-        else{
+        } else {
             if (pocketProtectState == PocketProtectState.START_GUARD) {
 
-                Vibrator myvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                myvibrator.vibrate(new long[]{100,10,100,1000}, 0);
-
+                boolean isWarningVibrator = SharedUtils.getBoolean(this, "WarningVibrator", true);
+                if (isWarningVibrator){
+                    Vibrator myvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                    myvibrator.vibrate(new long[]{100,10,100,1000}, 0);
+                }
+                //soundPlayer.playWarning();
+                //soundPlayer.playWarningRaw(1);
             }
-
-
         }
     }
 
