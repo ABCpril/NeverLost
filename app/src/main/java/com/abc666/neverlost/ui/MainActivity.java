@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -39,12 +40,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 public class MainActivity extends BaseAppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
 
-    public String sphone_number = "";
-    public String receive_number =" ";
-    public String security_message = "";
-    public String receive_text = "";
+
     public LocationClient mLocationClient;
-    public String returnLocation;
+    public String returnLocation="";
 
 
     @BindView(R.id.tb_lock)
@@ -55,20 +53,12 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
     @BindView(R.id.ripple_back)
     RippleBackground rippleBack;
 
-    private boolean isProtectTips = true;
-    private boolean mIsExit = false;
     private SoundPlayer soundPlayer;
-    private IntentFilter intentFilter;
-    private SMSReceiver smsReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        intentFilter =new IntentFilter();
-        intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
-        smsReceiver = new SMSReceiver();
-        registerReceiver(smsReceiver,intentFilter);
         ButterKnife.bind(this);
         initView();
         mLocationClient = new LocationClient(getApplicationContext());
@@ -95,8 +85,6 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_OK) {
             if (resultCode == 1) {
-                sphone_number = data.getStringExtra("sphone_number");
-                security_message = data.getStringExtra("security_message");
             }
         }
     }
@@ -107,6 +95,8 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
 
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
+        option.setIsNeedAddress(true);
+        option.setIsNeedLocationDescribe(true);
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
         option.setCoorType("bd09ll");
         option.setScanSpan(5000);
@@ -126,8 +116,7 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
                 if(grantResults.length > 0){
                     for(int result : grantResults){
                         if(result != PackageManager.PERMISSION_GRANTED){
-                            Toast.makeText(this,"必须同意使用所有权限才能使用本程序",Toast.LENGTH_LONG).show();
-                            finish();
+                            Toast.makeText(this,"必须同意使用所有权限才能发送安全位置短信",Toast.LENGTH_LONG).show();
                             return;
                         }
                     }
@@ -146,10 +135,12 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         public void onReceiveLocation(BDLocation location){
             StringBuilder currentPosition = new StringBuilder();
             currentPosition.append("纬度：").append(location.getLatitude()).append("\n");
-            currentPosition.append("经度：").append(location.getAltitude()).append("\n");
-            currentPosition.append("城市：").append(location.getCity()).append("\n");
-            currentPosition.append("类型：").append(location.getLocType());
+            currentPosition.append("经度：").append(location.getLongitude()).append("\n");
+            currentPosition.append("位置：").append(location.getAddrStr()).append("\n");
+            currentPosition.append("位置描述：").append(location.getLocationDescribe());
             returnLocation = currentPosition.toString();
+            Log.i("loc",returnLocation);
+            SharedUtils.putString(MainActivity.this,"return_loc",returnLocation);
         }
 
     }
@@ -159,7 +150,7 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         super.onDestroy();
         // 释放音乐实例
         soundPlayer.release();
-        unregisterReceiver(smsReceiver);
+        mLocationClient.stop();
     }
 
     @SuppressLint("NewApi")
@@ -174,40 +165,6 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         tbLock.setOnTouchListener(this);
     }
 
-
-    class SMSReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            SmsMessage msg = null;
-            Bundle bundle = intent.getExtras();
-            if(intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")){
-                if(bundle != null){
-                    Object[] pdusObj = (Object[]) bundle.get("pdus");
-                    for(Object p : pdusObj){
-                        msg = SmsMessage.createFromPdu((byte[]) p);
-                        receive_number=msg.getOriginatingAddress();
-                        receive_text=msg.getMessageBody();
-                        Toast.makeText(MainActivity.this,"SMSReceiver Complete",Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            }
-
-        }
-    }
-
-
-    private void sendMessage(){
-        if(receive_number.equals(sphone_number) ){
-            if (receive_number.equals(security_message)){
-               SmsManager sm = SmsManager.getDefault();
-               sm.sendTextMessage(sphone_number,null,returnLocation,null,null);
-               sm.sendTextMessage("18795389902",null,"hah",null,null);
-           }
-        }
-        //Toast.makeText(MainActivity.this,"hah",Toast.LENGTH_LONG).show();
-    }
 
 
     @Override
