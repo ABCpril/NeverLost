@@ -20,7 +20,7 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.baidu.location.BDAbstractLocationListener;
+import com.abc666.neverlost.util.SharedUtils;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -28,10 +28,8 @@ import com.baidu.location.LocationClientOption;
 import com.skyfishjy.library.RippleBackground;
 import com.abc666.neverlost.R;
 import com.abc666.neverlost.base.BaseAppCompatActivity;
-import com.abc666.neverlost.config.SPConfig;
 import com.abc666.neverlost.module.SoundPlayer;
 import com.abc666.neverlost.service.AutoProtectService;
-import com.abc666.neverlost.util.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -214,9 +212,8 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
 
     @Override
     public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-        // 保存开启状态
-        //SPUtils.getInstance().put(SPConfig.AUTO_PROTECT, isChecked);
         // 播放防盗开启提示音
+        soundPlayer.playOpenTone();
         Vibrator mvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         mvibrator.vibrate(2000);
 
@@ -224,8 +221,12 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
             // 关闭波纹效果
             rippleBack.stopRippleAnimation();
             // 开启自动防盗服务
-            Intent startIntent = new Intent(this, AutoProtectService.class);
-            startService(startIntent);//启动服务
+            boolean isProtectUSB = SharedUtils.getBoolean(this, "USBprotect", true);
+            if (isProtectUSB){
+                Intent startIntent = new Intent(this, AutoProtectService.class);
+                startService(startIntent);
+            }
+
             Intent poIntent=new Intent(MainActivity.this,PocketActivity.class);
             startActivity(poIntent);
 
@@ -233,6 +234,7 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
             // 显示波纹效果
             rippleBack.startRippleAnimation();
             // 关闭自动防盗
+            soundPlayer.playOpenTone();
             Intent stopIntent = new Intent(this,AutoProtectService.class);
             stopService(stopIntent);//停止服务
         }

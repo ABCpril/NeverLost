@@ -1,15 +1,12 @@
 package com.abc666.neverlost.module;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 
 import com.abc666.neverlost.R;
 import com.abc666.neverlost.base.BaseSoundPlayer;
-import com.abc666.neverlost.config.SPConfig;
-import com.abc666.neverlost.ui.MainActivity;
-import com.abc666.neverlost.util.SPUtils;
-
+import com.abc666.neverlost.util.SharedUtils;
+import com.blankj.ALog;
 
 
 public class SoundPlayer extends BaseSoundPlayer {
@@ -41,24 +38,11 @@ public class SoundPlayer extends BaseSoundPlayer {
      * 播放开启提示音
      */
     public void playOpenTone() {
-
-    }
-
-    /**
-     * 播放防护提示音
-     */
-    public void playProtectTone() {
         // 获取保存的raw序号
-        int rawIdPos = SPUtils.getInstance().getInt(SPConfig.PROTECT_SOUND_TONE_RAW, SPConfig.PROTECT_SOUND_TONE_RAW_DEFAULT);
-        // 判断是否要播放raw，因为默认raw为三个，所以不为3则播放的是raw
-        if (rawIdPos != 3) {
-            // 播放raw，提示音不循环
-            playToneRaw(rawIdPos);
-        } else {
-            // 播放path，提示音不循环
-            String path = SPUtils.getInstance().getString(SPConfig.PROTECT_SOUND_TONE_PATH);
-            baseSoundPlayer.playPath(path, false);
-        }
+        int rawIdPos = SharedUtils.getInt(context,"OPEN_TUNE_RAW", 0);
+        ALog.d(rawIdPos);
+        playToneRaw(rawIdPos);
+
     }
 
     /**
@@ -66,16 +50,9 @@ public class SoundPlayer extends BaseSoundPlayer {
      */
     public void playWarning() {
         // 获取保存的raw序号
-        int rawIdPos = SPUtils.getInstance().getInt(SPConfig.WARNING_SOUND_RAW, SPConfig.WARNING_SOUND_RAW_DEFAULT);
-        // 判断是否要播放raw，因为默认raw为三个，所以不为3则播放的是raw
-        if (rawIdPos != 3) {
-            // 播放raw，报警声循环
-            playWarningRaw(rawIdPos);
-        } else {
-            // 播放path，报警声循环
-            String path = SPUtils.getInstance().getString(SPConfig.WARNING_SOUND_PATH);
-            baseSoundPlayer.playPath(path, true);
-        }
+        int rawIdPos = SharedUtils.getInt(context,"OPEN_WARNING_RAW", 0);
+        ALog.d(rawIdPos);
+        playWarningRaw(rawIdPos);
     }
 
     /**

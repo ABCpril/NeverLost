@@ -128,7 +128,7 @@
                         android:background="@color/divider" />
 
                     <LinearLayout
-                        android:id="@+id/ll_protect_vibrator"
+                        android:id="@+id/ll_open_vibrator"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:gravity="center_vertical"
