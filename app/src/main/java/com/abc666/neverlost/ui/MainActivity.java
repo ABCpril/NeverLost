@@ -27,8 +27,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.itheima.dialogviewpager.ItHeiMaDialog;
-import com.itheima.dialogviewpager.ZoomOutPageTransformer;
 import com.skyfishjy.library.RippleBackground;
 import com.abc666.neverlost.R;
 import com.abc666.neverlost.base.BaseAppCompatActivity;
@@ -64,17 +62,17 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
-        boolean isFir=SharedUtils.getBoolean(this,"isFir",true);
-        if(isFir) {
-            //第一次进入跳转
-            ItHeiMaDialog.getInstance()
-                    .setImages(new int[]{R.drawable.help1, R.drawable.help2, R.drawable.help3, R.drawable.help4})
-                    .setCanceledOnTouchOutside(false)
-                    .setPageTransformer(new ZoomOutPageTransformer())
-                    .show(getFragmentManager());
-
-            SharedUtils.putBoolean(this,"isFir",false);
-        }
+//        boolean isFir=SharedUtils.getBoolean(this,"isFir",true);
+//        if(isFir) {
+//            //第一次进入跳转
+//            ItHeiMaDialog.getInstance()
+//                    .setImages(new int[]{R.drawable.help1, R.drawable.help2, R.drawable.help3, R.drawable.help4})
+//                    .setCanceledOnTouchOutside(false)
+//                    .setPageTransformer(new ZoomOutPageTransformer())
+//                    .show(getFragmentManager());
+//
+//            SharedUtils.putBoolean(this,"isFir",false);
+//        }
             //Register my location listener
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
@@ -184,6 +182,13 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         }
         tbLock.setOnCheckedChangeListener(this);
         tbLock.setOnTouchListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        tbLock.setChecked(false);
     }
 
 

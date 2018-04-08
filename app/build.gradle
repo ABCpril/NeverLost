@@ -38,6 +38,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation files('libs/BaiduLBS_Android.jar')
-    implementation 'com.github.open-android:GuideDialog:0.1.0'
 
 }

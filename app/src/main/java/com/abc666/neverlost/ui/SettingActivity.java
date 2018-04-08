@@ -84,7 +84,7 @@ public class SettingActivity extends AppCompatActivity {
                     security_message = data.getStringExtra("security_message");
                     SharedUtils.putString(SettingActivity.this,"sphone_number",sphone_number);
                     SharedUtils.putString(SettingActivity.this,"security_message",security_message);
-                }vvvc
+                }
         }
     }
 
