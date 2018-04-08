@@ -21,7 +21,9 @@
             android:layout_centerVertical="true"
             android:background="@drawable/bg_edittext"
             android:ems="10"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:maxLength="11"
+            android:digits="1234567890"/>
 
         <TextView
             android:id="@+id/tv_sphoneNumber"

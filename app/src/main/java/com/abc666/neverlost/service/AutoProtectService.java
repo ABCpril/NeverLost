@@ -5,11 +5,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.MediaPlayer;
 import android.os.BatteryManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Vibrator;
 
+import com.abc666.neverlost.MyApp;
+import com.abc666.neverlost.R;
+import com.abc666.neverlost.util.SharedUtils;
 import com.blankj.ALog;
 import com.abc666.neverlost.module.SoundPlayer;
 import com.abc666.neverlost.ui.MainActivity;
@@ -19,6 +23,7 @@ public class AutoProtectService extends Service {
 
 
     private SoundPlayer soundPlayer;
+    private MediaPlayer mp;
 
     private boolean isUsbGuard = false;
     private boolean isUsbIn = false;
@@ -39,6 +44,25 @@ public class AutoProtectService extends Service {
                     //ServiceUtils.startService(WarningService.class);
                     Vibrator mvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                     mvibrator.vibrate(new long[]{100,10,100,1000}, 0);
+                    //play diffrent sound
+                    int rawIdPos = SharedUtils.getInt(AutoProtectService.this,"WARNING_SOUND_RAW", 0);
+                    ALog.d(rawIdPos);
+
+                    if (rawIdPos==0){
+                        mp= MediaPlayer.create(AutoProtectService.this, R.raw.warning0_didi);//重新设置要播放的音频
+                        mp.setLooping(true);
+                        mp.start();
+                    } else {
+                        if (rawIdPos==1){
+                            mp= MediaPlayer.create(AutoProtectService.this, R.raw.warning1_police_car);//重新设置要播放的音频
+                            mp.setLooping(true);
+                            mp.start();
+                        } else {
+                            mp= MediaPlayer.create(AutoProtectService.this, R.raw.warning2_bibi);//重新设置要播放的音频
+                            mp.setLooping(true);
+                            mp.start();
+                        }
+                    }
                 }
             } else {
                 if (!isUsbGuard && !isUsbIn) {

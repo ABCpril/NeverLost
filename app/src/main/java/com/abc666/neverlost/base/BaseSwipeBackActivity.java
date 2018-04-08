@@ -19,7 +19,7 @@ public abstract class BaseSwipeBackActivity extends BaseAppCompatActivity implem
     }
 
     /**
-     * 初始化滑动返回。在 super.onCreate(savedInstanceState) 之前调用该方法
+     * Initialize the slide back. Call this method before super.onCreate(savedInstanceState)
      */
     private void initSwipeBackFinish() {
         mSwipeBackHelper = new BGASwipeBackHelper(this, this);
@@ -43,9 +43,10 @@ public abstract class BaseSwipeBackActivity extends BaseAppCompatActivity implem
     }
 
     /**
-     * 是否支持滑动返回。这里在父类中默认返回 true 来支持滑动返回，如果某个界面不想支持滑动返回则重写该方法返回 false 即可
+     * Whether to support slide return. Here the default return true in the parent class to support the slide return,
+     * if an interface does not want to support sliding return then override this method to return false
      *
-     * @return 默认返回 true 来支持滑动返回
+     * @return Default returns true to support sliding back
      */
     @Override
     public boolean isSupportSwipeBack() {
@@ -53,23 +54,23 @@ public abstract class BaseSwipeBackActivity extends BaseAppCompatActivity implem
     }
 
     /**
-     * 正在滑动返回
+     * Sliding back
      *
-     * @param slideOffset 从 0 到 1
+     * @param slideOffset From 0 to 1
      */
     @Override
     public void onSwipeBackLayoutSlide(float slideOffset) {
     }
 
     /**
-     * 没达到滑动返回的阈值，取消滑动返回动作，回到默认状态
+     * Does not reach the sliding return threshold, cancels the slide return action and returns to the default state
      */
     @Override
     public void onSwipeBackLayoutCancel() {
     }
 
     /**
-     * 滑动返回执行完毕，销毁当前 Activity
+     * Swipe to return to execution, destroy current activity
      */
     @Override
     public void onSwipeBackLayoutExecuted() {

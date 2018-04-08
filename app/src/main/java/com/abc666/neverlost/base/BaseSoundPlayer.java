@@ -10,16 +10,16 @@ public class BaseSoundPlayer extends MediaPlayer {
     private MediaPlayer mediaPlayer;
 
     /**
-     * 创建实例方法
+     * Create an instance method
      */
     public BaseSoundPlayer() {
         this.mediaPlayer = new MediaPlayer();
     }
 
     /**
-     * 播放声音（文件路径）
-     * @param path 文件路径
-     * @param isLooping 是否循环
+     * Play sound (file path)
+     * @param path file path
+     * @param isLooping Whether to loop
      */
     public void playPath(String path, boolean isLooping) {
         try {
@@ -54,10 +54,10 @@ public class BaseSoundPlayer extends MediaPlayer {
 
 
     /**
-     * 播放声音（raw资源）
-     * @param context 上下文
-     * @param rawId 播放raw资源id
-     * @param isLooping 循环播放
+     * Play sound (raw resource)
+     * @param context context
+     * @param rawId Play raw resource id
+     * @param isLooping Loop
      */
     public void playRaw(Context context, int rawId, boolean isLooping) {
         try {
@@ -91,7 +91,7 @@ public class BaseSoundPlayer extends MediaPlayer {
     }
 
     /**
-     * 暂停播放
+     * Pause playback
      */
     public void pause() {
         try {
@@ -104,7 +104,7 @@ public class BaseSoundPlayer extends MediaPlayer {
     }
 
     /**
-     * 停止播放
+     * Stop play
      */
     public void stop() {
         try {
@@ -118,7 +118,7 @@ public class BaseSoundPlayer extends MediaPlayer {
     }
 
     /**
-     * 释放资源
+     * Release resources
      */
     public void release() {
         try {
@@ -131,7 +131,7 @@ public class BaseSoundPlayer extends MediaPlayer {
     }
 
     /**
-     * @return 是否在播放状态
+     * @return Is it playing
      */
     public boolean isPlaying() {
         return mediaPlayer != null && mediaPlayer.isPlaying();
