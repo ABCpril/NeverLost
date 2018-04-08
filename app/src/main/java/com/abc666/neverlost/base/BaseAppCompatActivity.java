@@ -21,7 +21,7 @@ public class BaseAppCompatActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置点击toolbar的返回按钮关闭当前activity
+     * Set click the toolbar's back button to close the current activity
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

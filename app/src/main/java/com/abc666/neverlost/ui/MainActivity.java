@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -26,6 +27,8 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.itheima.dialogviewpager.ItHeiMaDialog;
+import com.itheima.dialogviewpager.ZoomOutPageTransformer;
 import com.skyfishjy.library.RippleBackground;
 import com.abc666.neverlost.R;
 import com.abc666.neverlost.base.BaseAppCompatActivity;
@@ -61,8 +64,21 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initView();
+        boolean isFir=SharedUtils.getBoolean(this,"isFir",true);
+        if(isFir) {
+            //第一次进入跳转
+            ItHeiMaDialog.getInstance()
+                    .setImages(new int[]{R.drawable.help1, R.drawable.help2, R.drawable.help3, R.drawable.help4})
+                    .setCanceledOnTouchOutside(false)
+                    .setPageTransformer(new ZoomOutPageTransformer())
+                    .show(getFragmentManager());
+
+            SharedUtils.putBoolean(this,"isFir",false);
+        }
+            //Register my location listener
         mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
+        //Dynamic request for user permission
         List<String> permissionList =new ArrayList<>();
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -89,10 +105,13 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         }
     }
     private void requestLocation(){
+        //Set the relevant parameters for the acquisition position
         initLocation();
+        //Start to get current location
         mLocationClient.start();
     }
 
+    //Set the relevant parameters for the acquisition position
     private void initLocation(){
         LocationClientOption option = new LocationClientOption();
         option.setIsNeedAddress(true);
@@ -109,6 +128,8 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         mLocationClient.setLocOption(option);
 
     }
+
+    //without all permissions(result)
     @Override
     public void onRequestPermissionsResult(int requestCode, String [] permissions, int [] grantResults){
         switch (requestCode){
@@ -116,13 +137,13 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
                 if(grantResults.length > 0){
                     for(int result : grantResults){
                         if(result != PackageManager.PERMISSION_GRANTED){
-                            Toast.makeText(this,"必须同意使用所有权限才能发送安全位置短信",Toast.LENGTH_LONG).show();
+                            Toast.makeText(this,"Must agree to use all permissions to send secure location text messages",Toast.LENGTH_LONG).show();
                             return;
                         }
                     }
                     requestLocation();
                 }else{
-                    Toast.makeText(this,"发生未知错误",Toast.LENGTH_LONG).show();
+                    Toast.makeText(this,"An unknown error has occurred",Toast.LENGTH_LONG).show();
                     finish();
                 }
                 break;
@@ -130,6 +151,7 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
         }
     }
 
+    //My locationListener(After getting the location, save the location)
     public class MyLocationListener implements BDLocationListener{
         @Override
         public void onReceiveLocation(BDLocation location){
@@ -137,9 +159,8 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
             currentPosition.append("纬度：").append(location.getLatitude()).append("\n");
             currentPosition.append("经度：").append(location.getLongitude()).append("\n");
             currentPosition.append("位置：").append(location.getAddrStr()).append("\n");
-            currentPosition.append("位置描述：").append(location.getLocationDescribe());
+            currentPosition.append("位置描述：").append(location.getLocationDescribe()).append("\n");
             returnLocation = currentPosition.toString();
-            Log.i("loc",returnLocation);
             SharedUtils.putString(MainActivity.this,"return_loc",returnLocation);
         }
 
@@ -148,14 +169,14 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // 释放音乐实例
+        // Release music instance
         soundPlayer.release();
         mLocationClient.stop();
     }
 
     @SuppressLint("NewApi")
     private void initView() {
-        // 实例化对象
+        // Instantiate objects
         soundPlayer = new SoundPlayer(this);
 
         if(!tbLock.isChecked()){
@@ -169,15 +190,18 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
 
     @Override
     public void onCheckedChanged(CompoundButton button, boolean isChecked) {
-        // 播放防盗开启提示音
+        // Play anti-theft open tone
         soundPlayer.playOpenTone();
-        Vibrator mvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        mvibrator.vibrate(2000);
+        boolean isOpenVibrator = SharedUtils.getBoolean(this, "OpenVibrator", true);
+        if (isOpenVibrator){
+            Vibrator mvibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            mvibrator.vibrate(2000);
+        }
 
         if (isChecked) {
-            // 关闭波纹效果
+            // Close the ripple effect
             rippleBack.stopRippleAnimation();
-            // 开启自动防盗服务
+            // Turn on automatic anti-theft service
             boolean isProtectUSB = SharedUtils.getBoolean(this, "USBprotect", true);
             if (isProtectUSB){
                 Intent startIntent = new Intent(this, AutoProtectService.class);
@@ -188,12 +212,12 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
             startActivity(poIntent);
 
         } else {
-            // 显示波纹效果
+            // Display ripple effect
             rippleBack.startRippleAnimation();
-            // 关闭自动防盗
+            // Turn off automatic security
             soundPlayer.playOpenTone();
             Intent stopIntent = new Intent(this,AutoProtectService.class);
-            stopService(stopIntent);//停止服务
+            stopService(stopIntent);//Out of service
         }
     }
 
@@ -212,15 +236,15 @@ public class MainActivity extends BaseAppCompatActivity implements CompoundButto
     }
 
     /**
-     * 绑定点击时间处理
+     * Bind click time processing
      *
-     * @param view 点击的view
+     * @param view Clicked view
      */
     @OnClick(R.id.fab_setting)
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.fab_setting:
-                // 跳转到设置页面
+                // Jump to settings page
                 Intent settingIntent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivityForResult(settingIntent, 1);
                 break;

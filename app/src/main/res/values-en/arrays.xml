@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="sound_tones">
+        <item>Car Lock</item>
+        <item>Movie Sound</item>
+        <item>Iron man</item>
+    </string-array>
+
+    <string-array name="sound_warning">
+        <item>didi</item>
+        <item>Car Horn</item>
+        <item>bibi</item>
+    </string-array>
+</resources>

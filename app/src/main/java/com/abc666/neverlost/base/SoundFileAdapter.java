@@ -30,9 +30,9 @@ public class SoundFileAdapter extends RecyclerView.Adapter<SoundFileAdapter.View
     private BaseSoundPlayer baseSoundPlayer;
 
     /**
-     * 创建实例方法
-     * @param recyclerView  绑定的RecycleView
-     * @param soundFileList 音乐文件类列表
+     * Create an instance method
+     * @param recyclerView  Bind RecycleView
+     * @param soundFileList Music file list
      */
     public SoundFileAdapter(RecyclerView recyclerView, List<SoundFile> soundFileList, BaseSoundPlayer baseSoundPlayer, boolean isSoundLooping) {
         this.soundFileList = soundFileList;
@@ -42,7 +42,7 @@ public class SoundFileAdapter extends RecyclerView.Adapter<SoundFileAdapter.View
     }
 
     /**
-     * 每个Item的ViewHolder相关控件
+     * ViewHolder related controls for each Item
      */
     static class ViewHolder extends RecyclerView.ViewHolder {
         CardView cardContent;
@@ -60,11 +60,11 @@ public class SoundFileAdapter extends RecyclerView.Adapter<SoundFileAdapter.View
     }
 
     /**
-     * 设置Item的Layout
+     * Set the layout of the Item
      *
-     * @param parent   容器父类
+     * @param parent   Container parent
      * @param viewType viewType
-     * @return 返回每个Item对应ViewHolder
+     * @return Return each item corresponding to ViewHolder
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -73,10 +73,10 @@ public class SoundFileAdapter extends RecyclerView.Adapter<SoundFileAdapter.View
     }
 
     /**
-     * 绑定Item的ViewHolder处理逻辑
+     * Bind Item's ViewHolder processing logic
      *
-     * @param holder   当前holder
-     * @param position 选中Item的序号
+     * @param holder   Current holder
+     * @param position Select the serial number of the Item
      */
     @Override
     public void onBindViewHolder(final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
@@ -115,10 +115,10 @@ public class SoundFileAdapter extends RecyclerView.Adapter<SoundFileAdapter.View
     }
 
     /**
-     * 设置Item状态
+     * Set the Item status
      *
-     * @param isSelected 是否选中
-     * @param holder     要处理的holder
+     * @param isSelected Checked
+     * @param holder     The holder to be processed
      */
     private void setSelectedItem(ViewHolder holder, boolean isSelected) {
         if (isSelected) {
@@ -136,7 +136,7 @@ public class SoundFileAdapter extends RecyclerView.Adapter<SoundFileAdapter.View
     }
 
     /**
-     * @return 获取数据总数
+     * @return Total number of data acquired
      */
     @Override
     public int getItemCount() {
@@ -144,7 +144,7 @@ public class SoundFileAdapter extends RecyclerView.Adapter<SoundFileAdapter.View
     }
 
     /**
-     * @return 选中的Item序号
+     * @return Selected Item Number
      */
     public int getSelectedPos() {
         return selectedPos;

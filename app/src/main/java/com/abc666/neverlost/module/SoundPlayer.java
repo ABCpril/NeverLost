@@ -11,12 +11,12 @@ import com.blankj.ALog;
 
 public class SoundPlayer extends BaseSoundPlayer {
     private MediaPlayer mediaPlayer;
-    // 提示音raw资源数组
+    // Raw resource array(prompt)
     private static int[] tones = new int[]{
             R.raw.tone0_car_lock,
             R.raw.tone1_robot_cop,
             R.raw.tone2_iron_man};
-    // 报警声raw资源数组
+    // Raw resource array(alarm)
     private static int[] warnings = new int[]{
             R.raw.warning0_didi,
             R.raw.warning1_police_car,
@@ -25,9 +25,9 @@ public class SoundPlayer extends BaseSoundPlayer {
     private Context context;
 
     /**
-     * 创建实例方法
+     * Create an instance method
      *
-     * @param context 上下文
+     * @param context context
      */
     public SoundPlayer(Context context) {
         this.baseSoundPlayer = new BaseSoundPlayer();
@@ -35,7 +35,7 @@ public class SoundPlayer extends BaseSoundPlayer {
     }
 
     /**
-     * 播放开启提示音
+     * Play open tone
      */
     public void playOpenTone() {
         // 获取保存的raw序号
@@ -46,7 +46,7 @@ public class SoundPlayer extends BaseSoundPlayer {
     }
 
     /**
-     * 播放报警声
+     * Play alarm tone
      */
     public void playWarning() {
         // 获取保存的raw序号
@@ -56,39 +56,37 @@ public class SoundPlayer extends BaseSoundPlayer {
     }
 
     /**
-     * 播放raw提示音
+     * Play prompt tone
      *
-     * @param rawIdPos raw资源序号
      */
     public void playToneRaw(int rawIdPos) {
         baseSoundPlayer.playRaw(context, tones[rawIdPos], false);
     }
 
     /**
-     * 播放raw报警声
+     * Play raw alarm tone
      *
-     * @param rawIdPos raw资源序号
      */
     public void playWarningRaw(int rawIdPos) {
         baseSoundPlayer.playRaw(context, warnings[rawIdPos], true);
     }
 
     /**
-     * 暂停播放
+     * Pause playback
      */
     public void pause() {
         baseSoundPlayer.pause();
     }
 
     /**
-     * 停止播放
+     * Stop play
      */
     public void stop() {
         baseSoundPlayer.stop();
     }
 
     /**
-     * 释放资源
+     * Release resources
      */
     public void release() {
         baseSoundPlayer.release();

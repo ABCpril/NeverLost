@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.abc666.neverlost.R;
-import com.abc666.neverlost.module.SoundPlayer;
 import com.abc666.neverlost.util.SharedUtils;
 import com.blankj.ALog;
 import com.suke.widget.SwitchButton;
@@ -44,7 +43,6 @@ public class SettingActivity extends AppCompatActivity {
     @BindView(R.id.ll_warning_tone)
     LinearLayout llWarningTone;
 
-    private SoundPlayer soundPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +61,12 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+    //Initialize button and text content
     private void InitView() {
         toneItems = getResources().getStringArray(R.array.sound_tones);
         warningItems = getResources().getStringArray(R.array.sound_warning);
+        tvOpenTone.setText(SharedUtils.getString(this,"OPEN_TUNE_NAME","KOKO"));
+        tvWarningSound.setText(SharedUtils.getString(this,"WARNING_SOUND_NAME","didi"));
         boolean isProtectUSB = SharedUtils.getBoolean(this, "USBprotect", true);
         sbProtectUsb.setChecked(isProtectUSB);
         boolean isOpenVibrator = SharedUtils.getBoolean(this, "OpenVibrator", true);
@@ -81,9 +82,9 @@ public class SettingActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     sphone_number = data.getStringExtra("sphone_number");
                     security_message = data.getStringExtra("security_message");
-                    SharedUtils.putString(this,"sphone_number",sphone_number);
-                    SharedUtils.putString(this,"security_message",security_message);
-                }
+                    SharedUtils.putString(SettingActivity.this,"sphone_number",sphone_number);
+                    SharedUtils.putString(SettingActivity.this,"security_message",security_message);
+                }vvvc
         }
     }
 
@@ -91,12 +92,13 @@ public class SettingActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+        //store choice
         SharedUtils.putBoolean(this, "USBprotect", sbProtectUsb.isChecked());
         SharedUtils.putBoolean(this, "OpenVibrator", sbOpenVibrator.isChecked());
         SharedUtils.putBoolean(this, "WarningVibrator", sbWarningVibrator.isChecked());
     }
 
-
+    //choose music
     @OnClick({R.id.ll_open_tone, R.id.ll_warning_tone})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -109,6 +111,7 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
 
+    //choose open sound
     private void showSoundDialog(final String[] items, final TextView textView){
 
         final int[] chooseDex = new int[1];
@@ -129,6 +132,7 @@ public class SettingActivity extends AppCompatActivity {
                         textView.setText(items[chooseDex[0]]);
                         SharedPreferences.Editor editor=getSharedPreferences("config",MODE_PRIVATE).edit();
                         editor.putInt("OPEN_TUNE_RAW",chooseDex[0]).commit();
+                        editor.putString("OPEN_TUNE_NAME",items[chooseDex[0]]).commit();
                         ALog.d(items[chooseDex[0]]);
                         dialog.dismiss();
                     }
@@ -149,15 +153,16 @@ public class SettingActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    //choose warning sound
     private void showWarningDialog(final String[] items, final TextView textView){
 
-        final int[] chooseDex = new int[1];
+        final int[] chooseWDex = new int[1];
         AlertDialog dialog=new AlertDialog.Builder(this).setTitle("^_^")
                 .setSingleChoiceItems(items, 0,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                chooseDex[0] =which;
+                                chooseWDex[0] =which;
                                 ALog.d(which);
                             }
                         })
@@ -165,10 +170,11 @@ public class SettingActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        textView.setText(items[chooseDex[0]]);
+                        textView.setText(items[chooseWDex[0]]);
                         SharedPreferences.Editor editor=getSharedPreferences("config",MODE_PRIVATE).edit();
-                        editor.putInt("WARNING_SOUND_RAW",chooseDex[0]).commit();
-                        ALog.d(items[chooseDex[0]]);
+                        editor.putInt("WARNING_SOUND_RAW",chooseWDex[0]).commit();
+                        editor.putString("WARNING_SOUND_NAME",items[chooseWDex[0]]).commit();
+                        ALog.d(items[chooseWDex[0]]);
                         dialog.dismiss();
                     }
                 })
