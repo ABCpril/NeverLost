@@ -52,16 +52,24 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="21x0b0lcsFvBXMkLXS1lFXp00D5WgtmA" />
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SettingActivity" />
-        <activity android:name=".ui.PocketActivity" />
-        <activity android:name=".ui.SecurityActivity" />
+        <activity android:name=".ui.SettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.PocketActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SecurityActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".ui.SMSReceiver"
